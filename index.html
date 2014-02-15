@@ -16,14 +16,15 @@
 
             <div ng-controller="DemoCtrl">
                 <p>
+                    <input type="text" ng-model="localStorageName" placeholder="Enter your Name"> <br />
                     <input type="text" ng-model="localStorageDemo" placeholder="Enter your FMR">
                 </p>
                 <blockquote class="well" ng-show="localStorageDemoValue">
                     <p>Current FMR ID: {{localStorageDemoValue}}</p>
            <ul>
-                <li>FMR StonewayFS Website Link:      <a href="http://www.stonewayfs.com/#a-{{localStorageDemoValue}}">http://www.stonewayfs.com/#a-{{localStorageDemoValue}}</a></li>
-                <li>FMR FMR Mobile Quote Center Link: <a href="http://www.stonewaybizpro.com/mobileform.html#a-{{localStorageDemoValue}}">http://www.stonewaybizpro.com/mobileform.html#a-{{localStorageDemoValue}}</a></li>
-                <li>FMR Recruiting Enrollment Link:   <a href="http://app.stonewayfs.com/j.pl?46b419e7232792dfaedaa97a3bc195a2477c6cc5e2e55582f9d832c206b73abb/&a={{localStorageDemoValue}}">http://app.stonewayfs.com/j.pl?46b419e7232792dfaedaa97a3bc195a2477c6cc5e2e55582f9d832c206b73abb/&a={{localStorageDemoValue}}</a></li>
+                <li>FMR Opportunity Video Link:       <a href="http://www.stonewayfs.com/#a-{{localStorageDemoValue}}">http://www.stonewayfs.com/#a-{{localStorageDemoValue}}</a></li>
+                <li>FMR Quote Center Link:            <a href="https://www.stonewaybizpro.com/mobileform.html#a-{{localStorageDemoValue}}&{{localStorageNameValue}}">http://www.stonewaybizpro.com/mobileform.html#a-{{localStorageDemoValue}}&{{localStorageNameValue}}</a></li>
+                <li>FMR Recruiting Enrollment Link:   <a href="https://app.stonewayfs.com/j1.pl?46b419e7232792dfaedaa97a3bc195a2db65034d0c5ad7e661182a86a822ced8&a={{localStorageDemoValue}}&n={{localStorageNameValue}}">https://app.stonewayfs.com/j1.pl?46b419e7232792dfaedaa97a3bc195a2db65034d0c5ad7e661182a86a822ced8&a={{localStorageDemoValue}}&n={{localStorageNameValue}}</a></li>
 </ul>     
            </blockquote>
      
@@ -39,6 +40,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
     <script src="http://google-code-prettify.googlecode.com/svn/trunk/src/prettify.js"></script>
     <script src="http://gregpike.net/demos/angular-local-storage/localStorageModule.js.pagespeed.jm.V3EsIKZiQx.js"></script>
+    <!-- Possibly update to thiss http://gregpike.net/demos/angular-local-storage/angular-local-storage.js -->
     <script>
         //<![CDATA[
         var DemoCtrl = function($scope, localStorageService) {
@@ -46,6 +48,10 @@
             $scope.$watch('localStorageDemo', function(value) {
                 localStorageService.add('localStorageDemo', value);
                 $scope.localStorageDemoValue = localStorageService.get('localStorageDemo');
+            });
+            $scope.$watch('localStorageName', function(value) {
+                localStorageService.add('localStorageName', value);
+                $scope.localStorageNameValue = encodeURIComponent(localStorageService.get('localStorageName'));
             });
             $scope.storageType = 'Local storage';
             if (!localStorageService.isSupported()) {
@@ -64,4 +70,5 @@
   ga('send', 'pageview');
 
 </script>
+Built by &copy; <a href="http://onaclovtech.com">Onaclovtech</a> 2014
 </body>
