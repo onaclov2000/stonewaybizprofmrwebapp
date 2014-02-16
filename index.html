@@ -43,7 +43,8 @@
     <script>
         //<![CDATA[
         var DemoCtrl = function($scope, localStorageService) {
-            
+            scope.localStorageDemoValue = localStorageService.get('localStorageDemo');
+            $scope.localStorageNameValue = encodeURIComponent(localStorageService.get('localStorageName'));
             $scope.$watch('localStorageDemo', function(value) {
                 localStorageService.set('localStorageDemo', value);
                 $scope.localStorageDemoValue = localStorageService.get('localStorageDemo');

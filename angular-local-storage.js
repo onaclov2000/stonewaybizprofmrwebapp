@@ -89,7 +89,6 @@ angularLocalStorage.provider('localStorageService', function(){
           value = angular.toJson(value);
         }
         localStorage.setItem(prefix + key, value);
-        localStorage.getItem(prefix + key);
         if (notify.setItem) {
           $rootScope.$broadcast('LocalStorageModule.notification.setitem', {key: key, newvalue: value, storageType: 'localStorage'});
         }
