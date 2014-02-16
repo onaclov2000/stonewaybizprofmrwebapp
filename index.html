@@ -45,11 +45,11 @@
         var DemoCtrl = function($scope, localStorageService) {
             
             $scope.$watch('localStorageDemo', function(value) {
-                localStorageService.add('localStorageDemo', value);
+                localStorageService.set('localStorageDemo', value);
                 $scope.localStorageDemoValue = localStorageService.get('localStorageDemo');
             });
             $scope.$watch('localStorageName', function(value) {
-                localStorageService.add('localStorageName', value);
+                localStorageService.set('localStorageName', value);
                 $scope.localStorageNameValue = encodeURIComponent(localStorageService.get('localStorageName'));
             });
             $scope.storageType = 'Local storage';
