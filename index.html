@@ -16,8 +16,8 @@
 
             <div ng-controller="DemoCtrl">
                 <p>
-                    <input type="text" ng-model="localStorageName" placeholder="Enter your Name"> <br />
-                    <input type="text" ng-model="localStorageDemo" placeholder="Enter your FMR">
+                    <input type="text" ng-model="localStorageName" placeholder="Enter your Name" ng-change="nameChange()"> <br />
+                    <input type="text" ng-model="localStorageDemo" placeholder="Enter your FMR"  ng-change="demoChange()">
                 </p>
                 <blockquote class="well" ng-show="localStorageDemoValue">
                     <p>Current FMR ID: {{localStorageDemoValue}}</p>
@@ -45,14 +45,16 @@
         var DemoCtrl = function($scope, localStorageService) {
             $scope.localStorageDemoValue = localStorageService.get('localStorageDemo');
             $scope.localStorageNameValue = encodeURIComponent(localStorageService.get('localStorageName'));
-            $scope.$watch('localStorageDemo', function(value) {
-                localStorageService.set('localStorageDemo', value);
+            $scope.nameChange = function()
+            {
+                localStorageService.set('localStorageName', $scope.localStorageName);
+                $scope.localStorageNameValue = encodeURIComponent(localStorageService.get('localStorageName'));            
+            }
+            $scope.demoChange = function()
+            {
+                localStorageService.set('localStorageDemo', $scope.localStorageDemo);
                 $scope.localStorageDemoValue = localStorageService.get('localStorageDemo');
-            });
-            $scope.$watch('localStorageName', function(value) {
-                localStorageService.set('localStorageName', value);
-                $scope.localStorageNameValue = encodeURIComponent(localStorageService.get('localStorageName'));
-            });
+            }
             $scope.storageType = 'Local storage';
             if (!localStorageService.isSupported()) {
                 $scope.storageType = 'Cookie';
